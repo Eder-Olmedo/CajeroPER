@@ -19,7 +19,7 @@ function entregarDinero() {
         res.innerHTML = "No compa, no entregamos estos billetes";
     } else {
         for (let bi of caja) {
-            if (!(dinero % bi.valor == 10) || !(dinero % bi.valor == 30)) {
+            if ((dinero % bi.valor == 0) && (dinero >= bi.valor)) {
                 div = Math.floor(dinero / bi.valor);
                 papeles = div;
                 entregado.push(new Billete(bi.valor, papeles));
