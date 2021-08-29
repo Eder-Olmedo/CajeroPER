@@ -11,57 +11,30 @@ function entregarDinero() {
     let t = document.getElementById("dinero");
     dinero = parseInt(t.value);
 
-    if (dinero == 30) {
-        res.innerHTML = "No compa, no entregamos billetes de 30";
-    }
-    else if (dinero % 10 != 0) {
+    if (dinero == '') {
+        res.innerHTML = "Ingrese una cantidad";
+    } else if (dinero % 10 != 0) {
         res.innerHTML = "Solo multiplos de 10";
-    }
-    else if (dinero == 10) {
-        res.innerHTML = "NO se entregan billetes de 10";
-    }
-    else {
-        if (dinero > 10) {
-            for (let bi of caja) {
-                if (dinero < 100) {
-                    if (dinero % 20 != 0) {
-                        div = Math.floor(dinero / bi.valor);
-                        papeles = div;
-                        console.log(dinero);
-                        entregado.push(new Billete(bi.valor, papeles));
-                        dinero = dinero - (bi.valor * papeles);
-                    } else if (dinero % bi.valor == 0) {
-                        div = Math.floor(dinero / bi.valor);
-                        papeles = div;
-                        console.log(dinero);
-                        entregado.push(new Billete(bi.valor, papeles));
-                        dinero = dinero - (bi.valor * papeles);
-                    } else if (dinero % bi.valor == 10) {
-                        div = Math.floor(dinero / bi.valor);
-                        papeles = div;
-                        entregado.push(new Billete(bi.valor, papeles));
-                        dinero = dinero - (bi.valor * papeles);
-                    }
-
-                } /* else if (dinero >= 100) {
-
-                    div = Math.floor(dinero / bi.valor);
-                    papeles = div;
-                    console.log(dinero);
-                    entregado.push(new Billete(bi.valor, papeles));
-                    dinero = dinero - (bi.valor * papeles);
-                } */
+    } else if (dinero == 30 || dinero == 10) {
+        res.innerHTML = "No compa, no entregamos estos billetes";
+    } else {
+        for (let bi of caja) {
+            if (!(dinero % bi.valor == 10) || !(dinero % bi.valor == 30)) {
+                div = Math.floor(dinero / bi.valor);
+                papeles = div;
+                entregado.push(new Billete(bi.valor, papeles));
+                dinero = dinero - (bi.valor * papeles);
             }
         }
-        for (var e of entregado) {
-
-            if (e.cantidad != 0) {
-                res.innerHTML = res.innerHTML + e.cantidad + " billetes de " + e.valor + "<br/>";
-            }
-
-        }
-        entregado = [];
     }
+
+    for (var e of entregado) {
+        if (e.cantidad > 0) {
+            res.innerHTML = res.innerHTML + e.cantidad + " billetes de " + e.valor + "<br/>";
+        }
+    }
+    entregado = [];
+
 }
 
 
