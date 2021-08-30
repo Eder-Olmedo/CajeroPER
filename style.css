@@ -18,3 +18,10 @@ label{
 .entrada{
     text-align: center;
 }
+#result{
+
+    font-family: 'Helvetica';
+ 
+    display: inline-flex;
+    margin: auto;
+}

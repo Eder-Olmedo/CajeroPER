@@ -1,13 +1,22 @@
 class Billete {
-    constructor(v, c) {
-        this.valor = v;
-        this.cantidad = c;
+    constructor(valor, cantidad) {
+        this.valor = valor;
+        this.cantidad = cantidad;
+        this.imagen = new Image();
+        this.imagen.src = imagenes[this.valor];
+    }
+    mostrar() {
+        document.body.appendChild(this.imagen);
     }
 }
 
 let caja = [];
 let entregado = [];
-
+let imagenes = [];
+imagenes[200] = "s200.jpg";
+imagenes[100] = "s100.jpg";
+imagenes[50] = "s50.jpg";
+imagenes[20] = "s20.jpg";
 
 caja.push(new Billete(200, 10));
 caja.push(new Billete(100, 10));
@@ -38,33 +47,32 @@ function entregarDinero() {
         //recorre una rreglo con el valor de los billetes
         if (dinero >= billete.valor) {
             let cont = 0;
-            let val = 0;
+            let valorRetirado = 0;
             if (dinero % billete.valor == 10) {
                 cont = 1;
                 dinero = dinero - 20;
                 console.log(dinero, "10");
-                val = 20;
+                valorRetirado = 20;
             } else if (dinero % billete.valor == 30) {
                 cont = 2;
                 dinero = dinero - 40;
                 console.log(dinero, "30");
-                val = 40;
+                valorRetirado = 40;
             }
-            div = Math.floor(dinero/ billete.valor);
+            div = Math.floor(dinero / billete.valor);
             papeles = div;
             console.log("billete de: ", billete.valor, "cantidad", papeles, "id: 1-2", cont);
             entregado.push(new Billete(billete.valor, papeles));
-            dinero = dinero - (billete.valor * papeles)+val;
-
+            dinero = dinero - (billete.valor * papeles) + valorRetirado;
         }
     }
 
-
-
-
     for (var e of entregado) {
         if (e.cantidad > 0) {
-            res.innerHTML = res.innerHTML + e.cantidad + " billetes de " + e.valor + "<br/>";
+            res.innerHTML = res.innerHTML + e.cantidad + "" + "<img src=" + e.imagen.src + " />" + "<br/>";
+            for (var i = 0; i < e.cantidad-1; i++) {
+                res.innerHTML = res.innerHTML + e.cantidad + "" + "<img src=" + e.imagen.src + " />" + "<br/>";
+            }
         }
     }
     limpiar();
