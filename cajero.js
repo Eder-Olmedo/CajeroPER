@@ -36,25 +36,34 @@ function entregarDinero() {
     for (let billete of caja) {
 
         //recorre una rreglo con el valor de los billetes
-        if (dinero >= 20) {
-            let cont = 0;
-            if ((dinero % billete.valor == 10) || (dinero % billete.valor == 30)) {
-                cont = 1;
-                dinero = dinero - 20;
-            }
-            console.log(dinero);
-            div = Math.floor(dinero / billete.valor);
+        if (dinero >= billete.valor) {
+            if (dinero > 100) {
+                if ((dinero % billete.valor == 10)) {
+                    aux = billete.valor;
+                    billete.valor = 50;
+                    billete.valor = aux;
+                    dinero = dinero - 20;
+                } else if ((dinero % billete.valor == 30)) {
+                    aux = billete.valor;
+                    billete.valor = 50;
+                    billete.valor = aux;
+                    dinero = dinero - 40;
+                }
 
-            if (billete.valor == 20) {
-                papeles = div + cont;
-            } else {
+            }
+            if((dinero%20 == 0)){
+                div = Math.floor(dinero / billete.valor);
                 papeles = div;
-
+                entregado.push(new Billete(billete.valor, papeles));
             }
-            entregado.push(new Billete(billete.valor, papeles));
+            
+            console.log(dinero, "dinero inicial", billete.valor, "billetes", papeles, "cantidad");
+            
             dinero = dinero - (billete.valor * papeles);
+
         }
     }
+
 
     for (var e of entregado) {
         if (e.cantidad > 0) {
