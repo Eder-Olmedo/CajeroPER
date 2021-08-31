@@ -5,7 +5,7 @@ class Billete {
         this.imagen = new Image();
         this.imagen.src = imagenes[this.valor];
     }
-    mostrar() {
+    mostrar (){
         document.body.appendChild(this.imagen);
     }
 }
@@ -69,10 +69,8 @@ function entregarDinero() {
 
     for (var e of entregado) {
         if (e.cantidad > 0) {
-            res.innerHTML = res.innerHTML + e.cantidad + "" + "<img src=" + e.imagen.src + " />" + "<br/>";
-            for (var i = 0; i < e.cantidad-1; i++) {
-                res.innerHTML = res.innerHTML + e.cantidad + "" + "<img src=" + e.imagen.src + " />" + "<br/>";
-            }
+            res.innerHTML = res.innerHTML + e.cantidad + "" + "<img src="+e.imagen.src +" />" + "<br/>";
+            
         }
     }
     limpiar();
