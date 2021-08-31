@@ -5,9 +5,7 @@ class Billete {
         this.imagen = new Image();
         this.imagen.src = imagenes[this.valor];
     }
-    mostrar (){
-        document.body.appendChild(this.imagen);
-    }
+    
 }
 
 let caja = [];
@@ -47,8 +45,8 @@ function entregarDinero() {
         //recorre una rreglo con el valor de los billetes
         if (dinero >= billete.valor) {
             let cont = 0;
-            let valorRetirado = 0;
-            if (dinero % billete.valor == 10) {
+            let valorRetirado = 0; //
+            if (dinero % billete.valor == 10) {// ambos if, verfican que el residuo sea 10 y 30 respectivamente
                 cont = 1;
                 dinero = dinero - 20;
                 console.log(dinero, "10");
@@ -67,13 +65,13 @@ function entregarDinero() {
         }
     }
 
-    for (var e of entregado) {
+    for (var e of entregado) {//entrega el dinero con sus imagenes 
         if (e.cantidad > 0) {
-            res.innerHTML = res.innerHTML + e.cantidad + "" + "<img src="+e.imagen.src +" />" + "<br/>";
-            
+            res.innerHTML = res.innerHTML + e.cantidad + "" + "<img src=" + e.imagen.src + " />" + "<br/>";
+
         }
     }
-    limpiar();
+    limpiar(); // limpia la consola
 }
 
 function limpiar() {
@@ -94,5 +92,3 @@ function validarSolicitud(dinero) {
     return true;
 
 }
-
-
